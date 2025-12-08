@@ -5,19 +5,16 @@
   <title>TRSCDM Study – Main Survey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SurveyJS core styles and scripts from CDN -->
   <link href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
 
   <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
 </head>
 <body>
-  <!-- Where the survey will appear -->
   <div id="surveyContainer"></div>
 
   <script>
-    // 1) PASTE YOUR SURVEY JSON HERE
-    // Replace the {...} below with the full JSON from your main SurveyJS survey.
+    
     const surveyJson = {
   "completedHtmlOnCondition": [
     {
@@ -986,21 +983,17 @@
   "headerView": "advanced"
 };
 
-    // 2) Create the SurveyJS model from your JSON
     const survey = new Survey.Model(surveyJson);
 
-    // 3) Apply a basic built-in theme
     if (Survey.StylesManager && Survey.StylesManager.applyTheme) {
       Survey.StylesManager.applyTheme("defaultV2");
     }
 
-    // 4) Handle completion (for now: log data so you can see it's working)
     survey.onComplete.add(function(sender) {
       alert("Survey complete. Open the browser console to see the data.");
       console.log("Survey results:", sender.data);
     });
 
-    // 5) Render the survey when the page loads
     document.addEventListener("DOMContentLoaded", function() {
       survey.render(document.getElementById("surveyContainer"));
     });
