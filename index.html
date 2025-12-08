@@ -990,12 +990,14 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
     }
 
     survey.onComplete.add(function(sender) {
-  const payload = sender.data || {};
+  console.log("onComplete fired");
+  console.log("FLOW_URL is:", FLOW_URL);
 
-  // Optional: add client-side timestamp
+  const payload = sender.data || {};
   payload.clientSubmittedAt = new Date().toISOString();
 
-  // Send data to Power Automate + Excel
+  alert("Sending data to Power Automate…");
+
   fetch(FLOW_URL, {
     method: "POST",
     headers: {
@@ -1004,16 +1006,20 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
     body: JSON.stringify(payload)
   })
   .then(function(response) {
+    console.log("Flow response status:", response.status, response.statusText);
     if (!response.ok) {
       console.error("Flow response not OK:", response.status, response.statusText);
     }
+    return response.text();
+  })
+  .then(function(text) {
+    console.log("Flow response body:", text);
   })
   .catch(function(error) {
     console.error("Failed to send data to Flow:", error);
   });
 
-  // Still log to console for debugging
-  console.log("Survey results sent:", payload);
+  console.log("Survey results being sent:", payload);
 });
 
     document.addEventListener("DOMContentLoaded", function() {
