@@ -996,7 +996,8 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
   const payload = sender.data || {};
   payload.clientSubmittedAt = new Date().toISOString();
 
-  alert("Sending data to Power Automate…");
+  // Safari-safe: no alert(), use console instead
+  console.log("Attempting POST to Power Automate...");
 
   fetch(FLOW_URL, {
     method: "POST",
@@ -1007,9 +1008,6 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
   })
   .then(function(response) {
     console.log("Flow response status:", response.status, response.statusText);
-    if (!response.ok) {
-      console.error("Flow response not OK:", response.status, response.statusText);
-    }
     return response.text();
   })
   .then(function(text) {
@@ -1018,6 +1016,8 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
   .catch(function(error) {
     console.error("Failed to send data to Flow:", error);
   });
+});
+
 
   console.log("Survey results being sent:", payload);
 });
