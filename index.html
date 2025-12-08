@@ -982,7 +982,7 @@
   ],
   "headerView": "advanced"
 };
-
+const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/921affcfd0fa45fdb5ad2ec60bb7f20f/triggers/manual/paths/invoke?api-version=1";
     const survey = new Survey.Model(surveyJson);
 
     if (Survey.StylesManager && Survey.StylesManager.applyTheme) {
@@ -990,9 +990,31 @@
     }
 
     survey.onComplete.add(function(sender) {
-      alert("Survey complete. Open the browser console to see the data.");
-      console.log("Survey results:", sender.data);
-    });
+  const payload = sender.data || {};
+
+  // Optional: add client-side timestamp
+  payload.clientSubmittedAt = new Date().toISOString();
+
+  // Send data to Power Automate + Excel
+  fetch(FLOW_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function(response) {
+    if (!response.ok) {
+      console.error("Flow response not OK:", response.status, response.statusText);
+    }
+  })
+  .catch(function(error) {
+    console.error("Failed to send data to Flow:", error);
+  });
+
+  // Still log to console for debugging
+  console.log("Survey results sent:", payload);
+});
 
     document.addEventListener("DOMContentLoaded", function() {
       survey.render(document.getElementById("surveyContainer"));
