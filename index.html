@@ -19,8 +19,972 @@
     // 1) PASTE YOUR SURVEY JSON HERE
     // Replace the {...} below with the full JSON from your main SurveyJS survey.
     const surveyJson = {
-      /* PASTE YOUR MAIN SURVEY JSON OBJECT HERE */
-    };
+  "completedHtmlOnCondition": [
+    {
+      "expression": "{consent} <> 'Item 1' and {consent} notempty",
+      "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n  <p><b>Thank you for your time and consideration.</b></p>\n  <p>You have chosen not to participate in this study, and no further questions will be presented.</p>\n  <p>We appreciate your interest.</p>\n</div>\n"
+    },
+    {
+      "expression": "{scr_age18} = 'Item 2' or {scr_english} = 'Item 2' or {scr_dx} notempty and {scr_dx} <> 'Item 4' or {scr_symptoms} notempty and {scr_symptoms} <> 'Item 2'",
+      "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n<p><b>Thank you for your time and interest.</b></p>\n\n<p>Unfortunately, you do not meet the eligibility criteria for this study.\nWe sincerely appreciate your willingness to participate and encourage you to reach out if you are seeking support or additional resources.</p>\n\n<p><b>If you or someone you know is in crisis or experiencing emotional distress:</b><br>\nCall or text <b>988</b> to reach the \n<a href=\"https://988lifeline.org/\" target=\"_blank\">Suicide and Crisis Lifeline</a> \n(available 24/7).</p>\n\n<br><p><b>Local and National Mental Health Resources:</b></p>\n\n<ul>\n  <li><b>California Northstate University College of Psychology – CCAPS:</b><br>\n      Provides low-cost counseling services for the Sacramento community.<br>\n      <a href=\"https://www.psychology.cnsu.edu/ccaps\" target=\"_blank\">\n        www.psychology.cnsu.edu/ccaps\n      </a>\n  </li>\n\n  <li><b>Sacramento County Behavioral Health Services:</b><br>\n      Offers local mental-health and substance-use support, including prevention and crisis services.<br>\n      Phone: (916) 875-1055<br>\n      <a href=\"https://dhs.saccounty.gov/BHS/Pages/BHS-Home.aspx\" target=\"_blank\">\n        dhs.saccounty.gov/BHS/Pages/BHS-Home.aspx\n      </a>\n  </li>\n\n  <li><b>NAMI Sacramento:</b><br>\n      Peer and family-based mental health advocacy, education, and support programs.<br>\n      Phone: (916) 890-5467<br>\n      <a href=\"https://namisacramento.org/\" target=\"_blank\">\n        namisacramento.org\n      </a>\n  </li>\n\n  <li><b>988 Suicide and Crisis Lifeline:</b><br>\n      Free, confidential emotional support for anyone in distress.<br>\n      <a href=\"https://988lifeline.org/\" target=\"_blank\">\n        988lifeline.org\n      </a>\n  </li>\n</ul>\n\n<br>\n<p>Thank you again for your interest, and we wish you the very best.</p>\n\n</div>"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Welcome Page",
+      "title": "Welcome!",
+      "elements": [
+        {
+          "type": "html",
+          "name": "Welcome Screen",
+          "html": "<p>Thank you for your interest in our study.</p>\n<br>\n<p>This short screener will take about 2–3 minutes and helps us determine whether you are eligible to continue. Your answers are confidential.</p>\n<br><p>If you are eligible, you’ll be asked to complete a brief questionnaire and a short decision-making game, and you’ll have the option to enter a raffle for <b>one $100 gift card</b> or <b>one of two $50 gift cards</b>.</p>\n<br><p>Click <b>Next</b> to begin.</p>\n"
+        }
+      ]
+    },
+    {
+      "name": "Screener Page 1",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "scr_age18",
+          "title": "Are you at least 18 years old?",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Yes"
+            },
+            {
+              "value": "Item 2",
+              "text": "No"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "scr_english",
+          "title": "Are you able to read and write in English without assistance?",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Yes"
+            },
+            {
+              "value": "Item 2",
+              "text": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Screener Page 2",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "scr_dx",
+          "title": "Have you ever been diagnosed by a healthcare professional with any of the following?",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Bipolar disorder"
+            },
+            {
+              "value": "Item 2",
+              "text": "Schizophrenia or another psychotic disorder"
+            },
+            {
+              "value": "Item 3",
+              "text": "Substance use disorder (e.g., alcohol, cannabis, etc.)"
+            },
+            {
+              "value": "Item 4",
+              "text": "None of the above"
+            },
+            {
+              "value": "Item 5",
+              "text": "Prefer not to answer"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "scr_symptoms",
+          "title": "In the past 12 months, have you experiences hallucinations, delusions, or manic episodes?",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Yes"
+            },
+            {
+              "value": "Item 2",
+              "text": "No"
+            },
+            {
+              "value": "Item 3",
+              "text": "Prefer not to answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Informed Consent Page",
+      "title": "Informed Consent",
+      "elements": [
+        {
+          "type": "html",
+          "name": "Informed Consent",
+          "html": "<strong>Please read the following information carefully before deciding whether to participate.</strong><br />\n<br />\n<strong>Purpose of the Study</strong><br />\n<br />\nThe purpose of this study is to examine how adults make decisions about shared resources in group settings. You will complete brief questionnaires and a short decision-making activity involving hypothetical tokens. This study is part of Ehsan Azzami&rsquo;s doctoral dissertation in clinical psychology under the supervision of Krystal Piumatti, Psy.D., and David Jull-Patterson, Ph.D.<br />\n<br />\n<strong>Procedure</strong><br />\n<br />\nIf you agree to participate, you will be asked to:<br />\n<br />\n1. Complete a short set of questionnaires about general attitudes, background information, and decision-making preferences.<br />\n2. Take part in a brief decision-making activity in which you will allocate tokens between personal and group outcomes.<br />\n3. Answer a few short follow-up questions.<br />\n4. Read a written debriefing at the end of the study.<br />\n<br />\nYour total participation time will be approximately <strong>15&ndash;30 minutes</strong>.<br />\n<br />\nAt the end of the study, you will have the <strong>optional opportunity</strong> to enter a raffle to win <strong>one $100 gift card</strong> or <strong>one of two $50 gift cards</strong>. Entry into the raffle is collected through a separate form to ensure your responses during the study remain anonymous.<br />\n<br />\n<strong>Participant Requirements</strong><br />\n<br />\nTo participate, you must:<br />\n<br />\n1. Be at least 18 years old<br />\n2. Be able to read and understand English<br />\n3. Not have a current or past diagnosis of schizophrenia, bipolar disorder, or substance use disorder<br />\n4. Not currently be experiencing hallucinations, delusions, or manic symptoms<br />\n<br />\nThese criteria are in place to ensure participant safety and the reliability of the study data.<br />\n<br />\n<strong>Risks and Benefits</strong><br />\n<br />\n<strong>Risks:</strong><br />\n<br />\nRisks are minimal. Some participants may experience mild discomfort, frustration, or ambiguity during the decision-making activity. A small element of incomplete information is used during the task which will be fully explained in the debriefing at the end of the study. You may stop participation at any time without penalty.<br />\n<br />\n<strong>Benefits:</strong><br />\n<br />\nThere are no direct personal benefits to participating. Your contribution will help advance research on decision-making and group behavior.<br />\n<br />\n<strong>Voluntary Participation and Confidentiality</strong><br />\n<br />\nYour participation is entirely voluntary. You may withdraw at any time without penalty. No personally identifying information will be linked to your responses in the study. If you choose to enter the raffle, your contact information will be collected in a separate survey that cannot be linked back to your questionnaire or task responses. All research data will be stored on an encrypted, password-protected server accessible only to the research team. Results will be reported only in aggregate form (e.g., &ldquo;the average contribution was X tokens&rdquo;). No individuals will be identifiable in any presentation or publication.<br />\n<br />\n<strong>Contact the Research Team</strong><br />\n<br />\nIf you have questions about the study, you may contact:<br />\n<br />\n<strong>Principal Investigator</strong>: Dr. Krystal Piumatti, krystal.piumatti@cnsu.edu<br />\n<strong>Student Researcher</strong>: Ehsan Azzami, 15555@cnsu.edu<br />\n<br />\nCalifornia Northstate University (CNU) has an office that can answer questions about an individual&#39;s rights as a research participant, this office is the Institutional Review Board (IRB). The IRB is available to talk about any problems or concerns participants have about the study.<br />\n<br />\n<strong>IRB Chair</strong>:&nbsp;Katherine Whitcome, PhD., katherine.whitcome@cnsu.edu or (916) 686-8533<br />\n<strong>Chief Scientific Officer</strong>:&nbsp;Fakhrul Ahsan, fakhrul.ahsa@cnsu.edu.<br />\n<br />\n<strong>Statement of Consent</strong><br />\n<br />\nBy selecting &ldquo;Yes, I consent to participate,&rdquo; I confirm that: I have read and understood the information above, I understand that I may contact the research team if I have questions now or in the future, and I voluntarily agree to participate in this study."
+        },
+        {
+          "type": "radiogroup",
+          "name": "consent",
+          "title": "Do you consent to participate in this study?",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Yes, I consent to participate "
+            },
+            {
+              "value": "Item 2",
+              "text": "No, I do not consent to participate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Demographics Introduction",
+      "elements": [
+        {
+          "type": "html",
+          "name": "Demographics Intro",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n  <p><b>Next, you will complete a short questionnaire.</b></p>\n<br>\n  <p>This section includes basic background questions and general attitude items, and should take only a few minutes.</p>\n<br>\n  <p>As a small thank-you for participating, you will receive a brief <b>wellbeing-tips PDF immediately</b> after completing this questionnaire.</p>\n\n  <p><i>Note: This PDF is provided in addition to the optional gift-card raffle entry, which will still be available at the end of the study after the decision task and follow-up questions.</i></p>\n<br>\n  <p><b>Click Next to begin.</b></p>\n</div>\n"
+        }
+      ]
+    },
+    {
+      "name": "Demographics Qs",
+      "elements": [
+        {
+          "type": "html",
+          "name": "demographics_intro",
+          "html": "<strong>Instructions: Please answer the following questions to the best of your ability by selecting the most accurate choice or entering a response where appropriate.</strong></p>"
+        },
+        {
+          "type": "text",
+          "name": "age_years",
+          "title": "1. What is your age (years)?",
+          "inputType": "number",
+          "min": 18,
+          "max": 110,
+          "step": 1
+        },
+        {
+          "type": "radiogroup",
+          "name": "gender",
+          "title": "2. What is your gender?",
+          "choices": [
+            "Male",
+            "Female",
+            "Non-binary",
+            "Third gender",
+            "Prefer not to answer"
+          ],
+          "showOtherItem": true,
+          "otherText": "Prefer to self-describe:"
+        },
+        {
+          "type": "checkbox",
+          "name": "race_ethnicity",
+          "title": "3. Which racial or ethnic group(s) do you identify with? (Select all that apply)",
+          "choices": [
+            "American Indian or Alaska Native",
+            "Asian",
+            "Black or African American",
+            "Hispanic or Latin(o/a/x)",
+            "Native Hawaiian or Other Pacific Islander",
+            "Caucasian or European",
+            "Prefer not to answer"
+          ],
+          "showOtherItem": true,
+          "otherText": "Other (please specify):"
+        },
+        {
+          "type": "radiogroup",
+          "name": "education",
+          "title": "4. What is the highest level of education you have completed?",
+          "choices": [
+            "Less than high school",
+            "High school diploma or equivalent",
+            "Some college, no degree",
+            "Associate degree",
+            "Bachelor’s degree",
+            "Graduate or professional degree",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "text",
+          "name": "household_size",
+          "title": "5. What is the number of people, including yourself, who live in your household?",
+          "inputType": "number",
+          "min": 1
+        },
+        {
+          "type": "radiogroup",
+          "name": "household_income",
+          "title": "6. What is your estimated annual household income?",
+          "choices": [
+            "Less than $20,000",
+            "$20,000–$49,999",
+            "$50,000–$74,999",
+            "$75,000–$99,999",
+            "$100,000–$150,000",
+            "$150,000 or more",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "needs_ability",
+          "title": "7. How would you describe your ability to meet your day-to-day needs (e.g., food, housing, healthcare, transportation)?",
+          "choices": [
+            "Always able without difficulty",
+            "Usually able, with minor difficulty",
+            "Sometimes able, with some difficulty",
+            "Rarely able, with significant difficulty",
+            "Never able without assistance",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "slider",
+          "name": "ladder_self_position",
+          "title": "8. People in society differ in money, education, and type of job. Some have more and some have less. \n\nOn a scale from 1 to 10, where 1 means “least money, least education, and worst jobs or no job” and 10 means “most money, most education, and best jobs,” how would you rate your own position?",
+          "min": 1,
+          "max": 10,
+          "customLabels": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "labelCount": 10
+        },
+        {
+          "type": "radiogroup",
+          "name": "political_orientation",
+          "title": "9. How would you describe your general political orientation?",
+          "choices": [
+            "Very liberal",
+            "Somewhat liberal",
+            "Moderate",
+            "Somewhat conservative",
+            "Very conservative",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "political_party",
+          "title": "10. Which political party do you most align with?",
+          "choices": [
+            "Democratic",
+            "Republican",
+            "Independent",
+            "Prefer not to answer"
+          ],
+          "showOtherItem": true,
+          "otherText": "Other (please specify):"
+        },
+        {
+          "type": "radiogroup",
+          "name": "religious_affiliation",
+          "title": "11. What is your current religious or spiritual affiliation, if any?",
+          "choices": [
+            "Christianity",
+            "Judaism",
+            "Islam",
+            "Buddhism",
+            "Hinduism",
+            "Spiritual but not religious",
+            "No religious affiliation",
+            "Prefer not to answer"
+          ],
+          "showOtherItem": true,
+          "otherText": "Other organized religion (please specify):"
+        },
+        {
+          "type": "radiogroup",
+          "name": "religion_importance",
+          "title": "12. How important is religion or spirituality in your daily life?",
+          "choices": [
+            "Very important",
+            "Somewhat important",
+            "Not too important",
+            "Not at all important",
+            "Prefer not to answer",
+            "Does not apply"
+          ]
+        },
+        {
+          "type": "text",
+          "name": "home_language",
+          "title": "13. What language do you primarily speak at home?",
+          "placeholder": "language(s)"
+        },
+        {
+          "type": "html",
+          "name": "tgm_instructions",
+          "html": "<p><strong>Instructions: Please indicate how much you agree or disagree with each of the following statements about government and public institutions using the following scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neither Agree nor Disagree, 4 = Agree, 5 = Strongly Agree.</strong></p>"
+        },
+        {
+          "type": "matrix",
+          "name": "tgm",
+          "title": "",
+          "titleLocation": "hidden",
+          "columns": [
+            {
+              "value": "1",
+              "text": "1 = Strongly Disagree"
+            },
+            {
+              "value": "2",
+              "text": "2 = Disagree"
+            },
+            {
+              "value": "3",
+              "text": "3 = Neither Agree nor Disagree"
+            },
+            {
+              "value": "4",
+              "text": "4 = Agree"
+            },
+            {
+              "value": "5",
+              "text": "5 = Strongly Agree"
+            }
+          ],
+          "rows": [
+            {
+              "value": "tgm_1",
+              "text": "The federal government can protect the health of the population."
+            },
+            {
+              "value": "tgm_2",
+              "text": "The federal government communicates with citizens effectively."
+            },
+            {
+              "value": "tgm_3",
+              "text": "The federal government makes decisions that help citizens."
+            },
+            {
+              "value": "tgm_4",
+              "text": "The federal government shows good judgment."
+            },
+            {
+              "value": "tgm_5",
+              "text": "The federal government has sufficient expertise to lead the country."
+            },
+            {
+              "value": "tgm_6",
+              "text": "The federal government acts in the best interest of citizens."
+            },
+            {
+              "value": "tgm_7",
+              "text": "If citizens need help, the federal government will do its best to help them."
+            },
+            {
+              "value": "tgm_8",
+              "text": "The federal government makes decisions that support citizen autonomy (independence)."
+            },
+            {
+              "value": "tgm_9",
+              "text": "The federal government does everything they should to protect the population."
+            },
+            {
+              "value": "tgm_10",
+              "text": "The federal government is genuinely interested in the wellbeing of its citizens."
+            },
+            {
+              "value": "tgm_11",
+              "text": "The federal government is truthful in communication with citizens."
+            },
+            {
+              "value": "tgm_12",
+              "text": "The federal government delivers on its promises."
+            },
+            {
+              "value": "tgm_13",
+              "text": "The federal government’s work is open and transparent."
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "name": "gts_instructions",
+          "html": "<p><strong>General Trust Scale (GTS)</strong></p><p><strong>Instructions: Using the following scale, please indicate how much you agree or disagree with each statement: 1 = Strongly Disagree, 2 = Disagree, 3 = Neither Agree nor Disagree, 4 = Agree, 5 = Strongly Agree.</strong></p>"
+        },
+        {
+          "type": "matrix",
+          "name": "gts",
+          "title": "",
+          "titleLocation": "hidden",
+          "columns": [
+            {
+              "value": "1",
+              "text": "1 = Strongly Disagree"
+            },
+            {
+              "value": "2",
+              "text": "2 = Disagree"
+            },
+            {
+              "value": "3",
+              "text": "3 = Neither Agree nor Disagree"
+            },
+            {
+              "value": "4",
+              "text": "4 = Agree"
+            },
+            {
+              "value": "5",
+              "text": "5 = Strongly Agree"
+            }
+          ],
+          "rows": [
+            {
+              "value": "gts_1",
+              "text": "Most people are basically honest."
+            },
+            {
+              "value": "gts_2",
+              "text": "Most people are trustworthy."
+            },
+            {
+              "value": "gts_3",
+              "text": "Most people are basically good and kind."
+            },
+            {
+              "value": "gts_4",
+              "text": "Most people are trustful of others."
+            },
+            {
+              "value": "gts_5",
+              "text": "I am trustful."
+            },
+            {
+              "value": "gts_6",
+              "text": "Most people will respond in kind when they are trusted by others."
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "name": "fls_instructions",
+          "html": "<p><strong>Instructions: Please answer the following questions to the best of your ability. Select the one answer you believe is correct. If you do not know the answer, you may select “Don’t know.”</strong></p>"
+        },
+        {
+          "type": "radiogroup",
+          "name": "fls_1",
+          "title": "1. Suppose you had $100 in a savings account and the interest rate was 2% per year. After five years, how much would you have in the account if you left the money to grow?",
+          "choices": [
+            "More than $102",
+            "Exactly $102",
+            "Less than $102",
+            "Don’t know",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "fls_2",
+          "title": "2. Imagine that the interest rate on your savings account was 1% per year and inflation was 2% per year. After one year, would you be able to buy more than, exactly the same as, or less than today with the money in this account?",
+          "choices": [
+            "More than today",
+            "Exactly the same as today",
+            "Less than today",
+            "Don’t know",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "fls_3",
+          "title": "3. Please indicate whether this statement is true or false: “Buying a single company’s stock usually provides a safer return than a stock mutual fund.”",
+          "choices": [
+            "True",
+            "False",
+            "Don’t know",
+            "Prefer not to answer"
+          ]
+        },
+        {
+          "type": "html",
+          "name": "sds_instructions",
+          "html": "<p><strong>Instructions: Please read each statement carefully. Indicate whether the statement is True or False as it applies to you personally.</strong></p>"
+        },
+        {
+          "type": "matrix",
+          "name": "sds",
+          "title": "",
+          "titleLocation": "hidden",
+          "columns": [
+            "True",
+            "False"
+          ],
+          "rows": [
+            {
+              "value": "sds_1",
+              "text": "Before voting I thoroughly investigate the qualifications of all the candidates."
+            },
+            {
+              "value": "sds_2",
+              "text": "I never hesitate to go out of my way to help someone in trouble."
+            },
+            {
+              "value": "sds_3",
+              "text": "It is sometimes hard for me to go on with my work if I am not encouraged."
+            },
+            {
+              "value": "sds_4",
+              "text": "I have never intensely disliked anyone."
+            },
+            {
+              "value": "sds_5",
+              "text": "On occasions, I have had doubts about my ability to succeed in life."
+            },
+            {
+              "value": "sds_6",
+              "text": "I sometimes feel resentful when I don’t get my way."
+            },
+            {
+              "value": "sds_7",
+              "text": "I am always careful about my manner of dress."
+            },
+            {
+              "value": "sds_8",
+              "text": "My table manners at home are as good as when I eat out in a restaurant."
+            },
+            {
+              "value": "sds_9",
+              "text": "If I could get into a movie without paying and be sure I was not seen, I would probably do it."
+            },
+            {
+              "value": "sds_10",
+              "text": "On a few occasions, I have given up doing something because I thought too little of my ability."
+            },
+            {
+              "value": "sds_11",
+              "text": "I like to gossip at times."
+            },
+            {
+              "value": "sds_12",
+              "text": "There have been times when I felt like rebelling against people in authority even though I knew they were right."
+            },
+            {
+              "value": "sds_13",
+              "text": "No matter who I’m talking to, I’m always a good listener."
+            },
+            {
+              "value": "sds_14",
+              "text": "I can remember “playing sick” to get out of something."
+            },
+            {
+              "value": "sds_15",
+              "text": "There have been occasions when I took advantage of someone."
+            },
+            {
+              "value": "sds_16",
+              "text": "I’m always willing to admit it when I make a mistake."
+            },
+            {
+              "value": "sds_17",
+              "text": "I always try to practice what I preach."
+            },
+            {
+              "value": "sds_18",
+              "text": "I don’t find it particularly difficult to get along with loud-mouthed, obnoxious people."
+            },
+            {
+              "value": "sds_19",
+              "text": "I sometimes try to get even rather than forgive and forget."
+            },
+            {
+              "value": "sds_20",
+              "text": "When I don’t know something, I don’t mind admitting it."
+            },
+            {
+              "value": "sds_21",
+              "text": "I am always courteous, even to people who are disagreeable."
+            },
+            {
+              "value": "sds_22",
+              "text": "At times I have really insisted on having things my own way."
+            },
+            {
+              "value": "sds_23",
+              "text": "There have been occasions when I felt like smashing things."
+            },
+            {
+              "value": "sds_24",
+              "text": "I would never think of letting someone else be punished for my wrongdoings."
+            },
+            {
+              "value": "sds_25",
+              "text": "I never resent being asked to return a favor."
+            },
+            {
+              "value": "sds_26",
+              "text": "I have never been irked when people expressed ideas very different from my own."
+            },
+            {
+              "value": "sds_27",
+              "text": "I never make a long trip without checking the safety of my car."
+            },
+            {
+              "value": "sds_28",
+              "text": "There have been times when I was quite jealous of the good fortune of others."
+            },
+            {
+              "value": "sds_29",
+              "text": "I have almost never felt the urge to tell someone off."
+            },
+            {
+              "value": "sds_30",
+              "text": "I am sometimes irritated by people who ask favors of me."
+            },
+            {
+              "value": "sds_31",
+              "text": "I have never deliberately said something that hurt someone’s feelings."
+            },
+            {
+              "value": "sds_32",
+              "text": "I sometimes feel a little irritated when someone criticizes me."
+            },
+            {
+              "value": "sds_33",
+              "text": "I never get annoyed when people cut ahead of me in line."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Condition Assignment",
+      "elements": [
+        {
+          "type": "expression",
+          "name": "timeSeed",
+          "visible": false,
+          "expression": "dateDiff(today(), currentDate(), \"seconds\")"
+        },
+        {
+          "type": "text",
+          "name": "Condition",
+          "visible": false,
+          "setValueIf": "{Condition} empty",
+          "setValueExpression": "({timeSeed} % 4) + 1"
+        },
+        {
+          "type": "html",
+          "name": "question1",
+          "html": "<p>Condition (raw): <strong>{Condition}</strong></p>"
+        }
+      ]
+    },
+    {
+      "name": "Reliability Manipulation",
+      "elements": [
+        {
+          "type": "html",
+          "name": "PDF Reliable",
+          "visibleIf": "{Condition} = 1 or {Condition} = 2\n",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 800px;\">\n\n  <h3>10 Practical, Research-Backed Tips for Mental Wellness &amp; Daily Functioning</h3>\n\n  <p>Grounded in scientific research: simple to try, safe for most people, and suitable for everyday use.</p>\n\n  <br><p><em><b>Note:</b> These tips are for general well-being and are not a substitute for professional care. If you are struggling, consider reaching out to a qualified health professional.</em></p>\n\n  <br><p><strong>1. Optimize your sleep.</strong></p>\n  <p>Aim for around 7–9 hours of sleep per night and try to keep a consistent sleep schedule. Research in middle- and older-aged adults suggests that sleeping for about 7 hours per night, and avoiding both very short and very long sleep, is linked to better cognitive performance and mental health than sleeping much less or much more.¹</p>\n\n  <br><p><strong>2. Reset with 5 minutes of breathing.</strong></p>\n  <p>Slow, paced breathing, where your exhale lasts slightly longer than your inhale, may reduce stress and improve mood. About 5 minutes a day of structured breathing has been shown to improve mood and decrease physiological arousal.²</p>\n\n  <br><p><strong>3. Move more, even a little.</strong></p>\n  <p>Regular physical activity is linked to a lower risk of developing depression. Even small amounts of movement, below standard exercise guidelines, are associated with meaningful mental-health benefits compared with doing no activity.³</p>\n\n  <br><p><strong>4. Get outside.</strong></p>\n  <p>Spending time in natural environments, even a nearby park, is linked to better self-reported health and well-being. People who spend roughly 2 hours per week in nature report better overall health and higher well-being than those who do not.⁴</p>\n\n  <br><p><strong>5. Seek morning light.</strong></p>\n  <p>Getting natural light in the morning helps regulate your internal body clock, which supports healthier sleep patterns and may also improve mood. Try opening your curtains shortly after waking, stepping outside for a few minutes, or taking a brief morning walk.⁵</p>\n\n  <br><p><strong>6. Hum or sing to self-soothe.</strong></p>\n  <p>Gentle humming or soft vocalization can influence heart-rate variability in ways that support relaxation. Try humming when you feel stressed or as part of a wind-down routine before bed.⁶</p>\n\n  <br><p><strong>7. Laugh (seriously).</strong></p>\n  <p>Laughter can reduce stress-related physiological responses and support better mood, social connection, and overall well-being.⁷</p>\n\n  <br><p><strong>8. Try expressive writing.</strong></p>\n  <p>Spending about 15–20 minutes writing privately about your thoughts and feelings can reduce emotional burden and contribute to mental and physical health improvements over time.⁸ Write for yourself, with no pressure to edit or share.</p>\n\n  <br><p><strong>9. Declutter one small space.</strong></p>\n  <p>Cluttered home environments are associated with higher stress and more negative mood. Tidying a small area, like a shelf, drawer, or corner of your desk, may help create a greater sense of calm and control. Start very small if the task feels overwhelming.⁹</p>\n\n  <br><p><strong>10. Do a small act of kindness.</strong></p>\n  <p>Doing something kind for someone else, even anonymously, can boost mood and increase feelings of social connection. Acts of kindness have been shown to improve well-being and reduce symptoms of depression and anxiety.¹⁰</p>\n\n  <br><h6>Please Continue...</h4>\n  <p style=\"margin-top: 16px;\">\n     You will be able to download these tips as a PDF and <strong>enter the gift-card raffle</strong> once you complete the rest of the study. Please complete the rest of the study to access both.\n  </p>\n\n</div>\n"
+        },
+        {
+          "type": "html",
+          "name": "PDF Unreliable",
+          "visibleIf": "{Condition} = 3 or {Condition} = 4",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 800px;\">\n\n  <h3>10 Practical, Research-Backed Tips for Mental Wellness &amp; Daily Functioning</h3>\n\n  <p>Loading wellbeing-tips content…</p>\n\n  <div style=\"border: 1px solid #ccc; background-color: #f7f7f7; padding: 12px; margin-top: 10px;\">\n    <p><strong>PDF Load Error</strong></p>\n    <p>The file “Wellbeing_Tips.pdf” could not be loaded due to a file access issue. The document may be missing or unreadable.</p><br>\n    <p><strong>Error code: 0x0201 – File unavailable</p> </strong>\n    <p>Please try again later or notify the study team if the problem persists.</p><br>\n    <p style=\"color: #777; font-size: 0.85em; margin-top: 6px;\">PDF Viewer 3.1<br/>© 2025</p>\n  </div>\n\n  \n<br><h6>Please Continue..</h4>\n  <p style=\"margin-top: 16px;\">\n     At the end of this study, you will have the opportunity to <strong>enter the gift-card raffle</strong>. Please continue to the final page for details.\n  </p>\n\n</div>\n"
+        },
+        {
+          "type": "text",
+          "name": "question6",
+          "visible": false,
+          "setValueIf": "{question6} empty",
+          "setValueExpression": "({timeSeed} % 4) + 1"
+        },
+        {
+          "type": "html",
+          "name": "question2",
+          "html": "<p>Condition (raw): <strong>{Condition}</strong></p>"
+        }
+      ]
+    },
+    {
+      "name": "PGG Intro",
+      "elements": [
+        {
+          "type": "html",
+          "name": "PGG Intro Text",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n  <p><strong>Group Decision-Making Task</strong></p>\n  <p>\n    Please read carefully before proceeding with the game.\n  </p>\n<br>  <p>\n    In this part of the study, you will take part in a <strong>group decision-making task</strong>\n    involving tokens. You will be placed in a group of <strong>4 anonymous participants</strong>,\n    including you.\n  </p>\n\n  <br><p>\n    Each person in the group receives <strong>10 tokens</strong>. These tokens represent\n    <strong>points used only for this study</strong> and are <strong>not redeemable for real money</strong>.\n    You will decide how many of your 10 tokens to add to the shared <strong>group pool</strong>\n    and how many to keep for yourself.\n  </p>\n\n <br> <ul>\n    <li><strong>Tokens you keep</strong> stay in your individual account.</li>\n    <li>\n      <strong>Tokens you contribute</strong> are added to the group project, multiplied by 2, and the total\n      is then <strong>split equally</strong> among all 4 group members.\n    </li>\n  </ul>\n\n  <br><p>\n    There is <strong>no “right” or “wrong” amount</strong> to contribute. The decision is entirely up to you.\n  </p>\n\n  <br><p>\n    On the following screens, the system will set up your group. You will then see information about\n    <strong>contributions from other participants in your group</strong> before you make your own decision.\n  </p>\n\n</div>\n"
+        }
+      ]
+    },
+    {
+      "name": "PGG Loading",
+      "elements": [
+        {
+          "type": "html",
+          "name": "PGG Loading Text",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n  <p><strong>Setting up your group</strong></p>\n\n  <p>\n    Please wait while the system assigns you to a group and prepares the information you will see about\n    other participants' contributions.\n  </p>\n\n  <div style=\"text-align: center; margin: 24px 0;\">\n    <div class=\"loader\"></div>\n  </div>\n\n  <p id=\"loadingText\" style=\"text-align:center; font-size: 1.1em; margin-bottom: 10px;\">\n    <span class=\"loadingMessage\"></span>\n  </p>\n\n</div>\n\n<style>\n  /* Spinner: starts as a classic spinner, ends as a full dark ring */\n  .loader {\n    border: 4px solid #e0e0e0;           /* light ring */\n    border-top-color: #555555;           /* dark segment for spinner */\n    border-radius: 50%;\n    width: 38px;\n    height: 38px;\n    margin: 0 auto;\n    animation: spinAndStop 6s linear 1 forwards;\n  }\n\n  /* One animation: spin, then stop and become a full dark ring */\n  @keyframes spinAndStop {\n    0% {\n      transform: rotate(0turn);\n      border-color: #e0e0e0;\n      border-top-color: #555555;\n    }\n    90% {\n      transform: rotate(6turn);          /* several spins */\n      border-color: #e0e0e0;\n      border-top-color: #555555;\n    }\n    100% {\n      transform: rotate(6turn);          /* hold final angle */\n      border-color: #555555;             /* full dark ring */\n    }\n  }\n\n  /* Animated loading message */\n  .loadingMessage::after {\n    content: 'Please wait. Loading';\n    animation: loadingSteps 6s steps(5, end) 1 forwards;\n  }\n\n  /*\n    Timeline of the message progression:\n      0%   → \"Please wait. Loading\"\n      25%  → \"Please wait. Loading.\"\n      50%  → \"Please wait. Loading..\"\n      75%  → \"Please wait. Loading...\"\n      100% → \"Loading complete. Please proceed.\"\n  */\n  @keyframes loadingSteps {\n    0%   { content: 'Please wait. Loading'; }\n    25%  { content: 'Please wait. Loading.'; }\n    50%  { content: 'Please wait. Loading..'; }\n    75%  { content: 'Please wait. Loading...'; }\n    100% { content: 'Loading complete. Please proceed.'; }\n  }\n</style>\n"
+        },
+        {
+          "type": "html",
+          "name": "question5",
+          "html": "<p>Condition (raw): <strong>{Condition}</strong></p>"
+        }
+      ]
+    },
+    {
+      "name": "PGG Task",
+      "elements": [
+        {
+          "type": "html",
+          "name": "PGG High",
+          "visibleIf": "{Condition} = 1 or {Condition} = 3",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n  <p><strong>Group Pool Information</strong></p>\n\n  <p>\n    The table below shows the token allocations for the other participants in your group.\n  </p>\n\n  <p style=\"font-size: 0.9em; font-style: italic;\">\n    <strong>Note:</strong> The numerical \"Group Member IDs\" are anonymous labels assigned only for the\n    purpose of this decision-making game and cannot be linked to personal information.\n  </p>\n\n  <br>\n\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 14px;\">\n    <thead>\n      <tr>\n        <th style=\"border-bottom: 2px solid #ccc; text-align: left; padding: 6px;\">Group Member ID</th>\n        <th style=\"border-bottom: 2px solid #ccc; text-align: left; padding: 6px;\">Tokens Added to Group Pool</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 104</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">9 out of 10</td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 217</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">8 out of 10</td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 305</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">7 out of 10</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <br>\n\n  <p style=\"margin-top: 18px;\">\n    Please enter your decision below.\n  </p>\n\n</div>\n"
+        },
+        {
+          "type": "html",
+          "name": "PGG Low",
+          "visibleIf": "{Condition} = 2 or {Condition} = 4",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n  <p><strong>Group Pool Information</strong></p>\n\n  <p>\n    The table below shows the token allocations for the other participants in your group.\n  </p>\n\n  <p style=\"font-size: 0.9em; font-style: italic;\">\n    <strong>Note:</strong> The numerical \"Group Member IDs\" are anonymous labels assigned only for the\n    purpose of this decision-making game and cannot be linked to personal information.\n  </p>\n\n  <br>\n\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 14px;\">\n    <thead>\n      <tr>\n        <th style=\"border-bottom: 2px solid #ccc; text-align: left; padding: 6px;\">Group Member ID</th>\n        <th style=\"border-bottom: 2px solid #ccc; text-align: left; padding: 6px;\">Tokens Added to Group Pool</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 412</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">3 out of 10</td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 589</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">1 out of 10</td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">Player 630</td>\n        <td style=\"border-bottom: 1px solid #eee; padding: 6px;\">0 out of 10</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <br>\n\n  <p style=\"margin-top: 18px;\">\n    Please enter your decision below.\n  </p>\n\n</div>\n"
+        },
+        {
+          "type": "text",
+          "name": "pgg_contrib",
+          "title": "How many of your 10 tokens do you want to add to the group pool?",
+          "inputType": "number",
+          "min": 0,
+          "max": 10,
+          "step": 1
+        },
+        {
+          "type": "html",
+          "name": "pgg_punish_intro",
+          "html": "<div style=\"display: inline-block; text-align: left; max-width: 700px;\">\n\n  <p><strong>Optional costly punishment decision</strong></p>\n\n  <p>\n    You now have the option to apply a <strong>costly punishment</strong> to one or more of your group members.\n  </p>\n\n  <p>\n    If you choose to punish a group member, you would <strong>lose 1 token</strong> from your own payoff,\n    and that group member would <strong>lose 3 tokens</strong> from theirs.\n  </p>\n\n  <p><strong><em>You may choose to punish one or more group members or none at all.</em></strong></p>\n\n</div>"
+        },
+        {
+          "type": "checkbox",
+          "name": "pgg_punish_high",
+          "visibleIf": "{Condition} = 1 or {Condition} = 3",
+          "title": "If this option were available in the game, which group member(s), if any, would you choose to punish?",
+          "titleLocation": "top",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "p104",
+              "text": "Player 104 (added 9 out of 10 tokens)"
+            },
+            {
+              "value": "p217",
+              "text": "Player 217 (added 8 out of 10 tokens)"
+            },
+            {
+              "value": "p305",
+              "text": "Player 305 (added 7 out of 10 tokens)"
+            },
+            {
+              "value": "none",
+              "text": "I choose not to punish anyone",
+              "isExclusive": true
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "name": "pgg_punish_low",
+          "visibleIf": "{Condition} = 2 or {Condition} = 4",
+          "title": "If this option were available in the game, which group member(s), if any, would you choose to punish?",
+          "titleLocation": "top",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "p412",
+              "text": "Player 412 (added 3 out of 10 tokens)"
+            },
+            {
+              "value": "p589",
+              "text": "Player 589 (added 1 out of 10 tokens)"
+            },
+            {
+              "value": "p630",
+              "text": "Player 630 (added 0 out of 10 tokens)"
+            },
+            {
+              "value": "none",
+              "text": "I choose not to punish anyone",
+              "isExclusive": true
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "name": "question7",
+          "visible": false,
+          "setValueIf": "{question7} empty",
+          "setValueExpression": "({timeSeed} % 4) + 1"
+        }
+      ]
+    },
+    {
+      "name": "Post-Test",
+      "elements": [
+        {
+          "type": "html",
+          "name": "posttest_intro",
+          "html": "<p><strong>Almost done!</strong></p>\n<br><p><strong>Instructions: Please answer the following questions based on your experience during the group decision-making task.</strong></p><p><strong>Please indicate how much you agree or disagree with each of the following statements about government and public institutions using the following scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neither Agree nor Disagree, 4 = Agree, 5 = Strongly Agree.</strong></p>"
+        },
+        {
+          "type": "matrix",
+          "name": "posttrust",
+          "title": "",
+          "titleLocation": "hidden",
+          "columns": [
+            {
+              "value": "1",
+              "text": "1 = Strongly Disagree"
+            },
+            {
+              "value": "2",
+              "text": "2 = Disagree"
+            },
+            {
+              "value": "3",
+              "text": "3 = Neither Agree nor Disagree"
+            },
+            {
+              "value": "4",
+              "text": "4 = Agree"
+            },
+            {
+              "value": "5",
+              "text": "5 = Strongly Agree"
+            }
+          ],
+          "rows": [
+            {
+              "value": "pt_1",
+              "text": "I felt that the other group members were fair in their decisions."
+            },
+            {
+              "value": "pt_2",
+              "text": "I trusted the group to act cooperatively."
+            },
+            {
+              "value": "pt_3",
+              "text": "I felt confident in my own decision-making during the task."
+            },
+            {
+              "value": "pt_4",
+              "text": "I felt frustrated at any point during the task."
+            },
+            {
+              "value": "pt_5",
+              "text": "I believe my decisions were influenced by what I thought others would do."
+            },
+            {
+              "value": "pt_6",
+              "text": "The task felt realistic in representing real-world cooperation."
+            },
+            {
+              "value": "pt_7",
+              "text": "I would behave the same way if this were a real situation involving money."
+            },
+            {
+              "value": "pt_8",
+              "text": "I felt that the instructions were clear and easy to understand."
+            },
+            {
+              "value": "pt_9",
+              "text": "The study followed through on what it said it would provide."
+            }
+          ]
+        },
+        {
+          "type": "comment",
+          "name": "pt_open_9",
+          "title": "9. What was your main reason for deciding how many tokens to contribute?"
+        },
+        {
+          "type": "comment",
+          "name": "pt_open_10",
+          "title": "10. If you chose to use the costly punishment option, what influenced that decision?"
+        },
+        {
+          "type": "comment",
+          "name": "pt_open_11",
+          "title": "11. How reliable did you find the study’s instructions and procedures?"
+        },
+        {
+          "type": "comment",
+          "name": "pt_open_12",
+          "title": "12. Did you feel that your peers’ investment decisions influenced your behavior? If so, how?"
+        }
+      ]
+    },
+    {
+      "name": "Debrief + Raffle (DEBUG)",
+      "elements": [
+        {
+          "type": "html",
+          "name": "question4",
+          "html": "<p><b>DEBUG ONLY (will be removed):</b> Your condition is <b>{Condition}</b>.\n"
+        },
+        {
+          "type": "html",
+          "name": "Debrief",
+          "html": "<p><strong>Thank you very much for participating in this study.</strong></p>\n<br>\n\n<p>\nThis research examines how trust, authority reliability, and group behavior influence decision-making in situations where individuals must balance their own outcomes with the interests of a group. We are particularly interested in how experiences with reliable or unreliable authorities, as well as perceptions of peer cooperation, shape decisions in shared-resource settings.\n</p>\n<br>\n\n<p>\nTo examine these questions accurately, some parts of the study involved intentional concealment or simulation. The well-being tips PDF you encountered earlier was used to create a reliable or unreliable authority experience, depending on the condition you were assigned to. This small manipulation was designed to explore how even minor reliability cues can influence later judgments and behavior.\n</p>\n<br>\n\n<p>\nThe information you viewed about the other members in your group during the Public Goods Game was also simulated. The group member IDs and token allocations were pre-generated so that every participant within a given condition would encounter the same pattern of peer behavior. This approach helps us understand how people respond to group dynamics while keeping the experience consistent for all participants.\n</p>\n<br>\n\n<p>\nYou were also given the option to assign costly punishment within the game. Although the decision was described realistically, no real participants were affected, and no actual payouts or consequences occurred outside of the simulated task environment.\n</p>\n<br>\n\n<p>\nThese forms of mild deception are commonly used in behavioral research when full transparency would alter how people behave. All procedures, including the use of simulated group members and reliability variations, were reviewed and approved by the university’s Institutional Review Board to ensure ethical standards are met.\n</p>\n<br>\n\n<p>\nIf you would like to download a personal copy of the well-being tips referenced earlier, you may do so here:\n<a href=\"https://cnsuedu-my.sharepoint.com/:b:/g/personal/15555_cnsu_edu/IQAJF9pNQyt1SK9HHPY4O24EAbZD81xEvmxEChjVFyMpjnA?e=gYWZuf\" target=\"_blank\">Download the Well-Being Tips PDF</a>.\n</p>\n<br>\n\n<p>\nThere are no right or wrong responses in this study. Your decisions reflect meaningful reactions to uncertainty, trust, and cooperation, which are exactly what we aim to understand. If you have any questions about the study’s purpose, procedures, or findings, you are welcome to ask now or contact the research team using the information provided.\n</p>\n<br>\n\n<p>\nAs promised, you will now have the opportunity to <strong>enter the raffle</strong> for a chance to win a <strong>$100 gift card or one of two $50 gift cards</strong>. <br><br>Please <strong>continue</strong> to the next page for details.\n</p>\n"
+        }
+      ]
+    },
+    {
+      "name": "Raffle External",
+      "elements": [
+        {
+          "type": "html",
+          "name": "Raffle External Block",
+          "html": "<p><strong>Raffle Entry</strong></p>\n<br>\n\n<p>\nThank you again for completing the study. As part of your participation, you are invited to enter our raffle for a chance to win a <strong>$100 gift card</strong> or one of <strong>two $50 gift cards</strong>.\n</p>\n<br>\n\n<p>\nTo protect your privacy, the raffle entry form is hosted in a <strong>separate survey</strong> that is not connected to your study responses. Your email will not be linked in any way to the decisions or answers you provided in this study.\n</p>\n<br>\n\n<p>\nThe raffle entry form asks for <strong>very minimal information</strong> and should take <strong>under one minute</strong> to complete.\n</p>\n<br>\n\n<p>\nTo enter the raffle, please follow this link:<br>\n<a href=\"YOUR_RAFFLE_SURVEY_LINK_HERE\" target=\"_blank\">Enter the Gift Card Raffle</a>\n</p>\n<br>\n\n<p>\nIf you have any questions or concerns about the raffle process, you may contact the research team: \n<br><br><strong>Principal Investigator</strong>: Dr. Krystal Piumatti, krystal.piumatti@cnsu.edu<br />\n<strong>Student Researcher</strong>: Ehsan Azzami, 15555@cnsu.edu<br />\n<br />\nCalifornia Northstate University (CNU) has an office that can answer questions about an individual&#39;s rights as a research participant, this office is the Institutional Review Board (IRB). The IRB is available to talk about any problems or concerns participants have about the study.<br />\n<br />\n<strong>IRB Chair</strong>:&nbsp;Katherine Whitcome, PhD., katherine.whitcome@cnsu.edu or (916) 686-8533<br />\n<strong>Chief Scientific Officer</strong>:&nbsp;Fakhrul Ahsan, fakhrul.ahsa@cnsu.edu.<br />\n</p>\n"
+        }
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "type": "complete",
+      "expression": "{consent} <> 'Item 1' and {consent} notempty"
+    },
+    {
+      "type": "complete",
+      "expression": "{scr_age18} = 'Item 2' or {scr_english} = 'Item 2' or {scr_dx} notempty and {scr_dx} <> 'Item 4' or {scr_symptoms} notempty and {scr_symptoms} <> 'Item 2'"
+    }
+  ],
+  "headerView": "advanced"
+};
 
     // 2) Create the SurveyJS model from your JSON
     const survey = new Survey.Model(surveyJson);
