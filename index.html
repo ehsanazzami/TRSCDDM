@@ -1048,6 +1048,20 @@ if (mtParams.hitId) {
   const payload = sender.data || {};
   payload.clientSubmittedAt = new Date().toISOString();
 
+  // Ensure MTurk IDs make it into the saved payload,
+  // even if SurveyJS doesn't keep them in sender.data.
+  if (typeof mtParams !== "undefined") {
+    if (mtParams.workerId && !payload.mt_workerId) {
+      payload.mt_workerId = mtParams.workerId;
+    }
+    if (mtParams.assignmentId && !payload.mt_assignmentId) {
+      payload.mt_assignmentId = mtParams.assignmentId;
+    }
+    if (mtParams.hitId && !payload.mt_hitId) {
+      payload.mt_hitId = mtParams.hitId;
+    }
+  }
+
   console.log("Survey results being sent:", payload);
   console.log("Attempting POST to Power Automate...");
 
