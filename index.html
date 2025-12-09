@@ -1012,6 +1012,34 @@ const FLOW_URL = "https://defaultc9324e9031924368b40dc16169c276.de.environment.a
     if (Survey.StylesManager && Survey.StylesManager.applyTheme) {
       Survey.StylesManager.applyTheme("defaultV2");
     }
+// Helper: get URL query parameters as an object
+function getQueryParams() {
+  const params = {};
+  const queryString = window.location.search.substring(1);
+  if (!queryString) return params;
+
+  queryString.split("&").forEach(function (pair) {
+    const [key, value] = pair.split("=");
+    if (!key) return;
+    params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+  });
+
+  return params;
+}
+
+// Capture MTurk IDs from URL (CloudResearch/MTurk add workerId, assignmentId, hitId)
+const mtParams = getQueryParams();
+console.log("MTurk query params:", mtParams);
+
+if (mtParams.workerId) {
+  survey.setValue("mt_workerId", mtParams.workerId);
+}
+if (mtParams.assignmentId) {
+  survey.setValue("mt_assignmentId", mtParams.assignmentId);
+}
+if (mtParams.hitId) {
+  survey.setValue("mt_hitId", mtParams.hitId);
+}
 
     survey.onComplete.add(function(sender) {
   console.log("onComplete fired");
