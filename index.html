@@ -1002,6 +1002,15 @@ const CLOUDRESEARCH_COMPLETE_URL = "https://connect.cloudresearch.com/participan
 const CLOUDRESEARCH_SCREENED_OUT_URL = "https://connect.cloudresearch.com/participant/project/AF80E6F505/complete";
 const CLOUDRESEARCH_DECLINED_CONSENT_URL = "https://connect.cloudresearch.com/participant/project/FFECF6FEC7/complete";
 
+// Connect appends these case-sensitive identifiers to the project URL. Store
+// them as hidden survey values so completed research rows can be reconciled
+// with Connect without displaying the identifiers to participants.
+const connectParameters = new URLSearchParams(window.location.search);
+["participantId", "assignmentId", "projectId"].forEach(function(parameterName) {
+  const parameterValue = connectParameters.get(parameterName);
+  if (parameterValue) survey.setValue(parameterName, parameterValue);
+});
+
 // Generate an unbiased random integer from 1 through 4 using the browser's
 // cryptographic random-number generator. The condition is stored in the
 // research payload but is never displayed to participants.
